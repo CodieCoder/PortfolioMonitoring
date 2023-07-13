@@ -32,9 +32,13 @@ export class VisitorController {
     @Body() body: AddNewVisitorDto,
     @Req() request: Request,
   ): Promise<IAddVisitor> {
+    const clientIP = request.headers['x-forwarded-for'];
+    // ?.split(',').shift() ||
+    // request.socket?.remoteAddress;
+
     console.log('Testee did', {
       ...body,
-      IP_Remote_Access: request.socket.remoteAddress,
+      IP_Remote_Access: clientIP,
     });
     if (!body.deviceInfo) {
       throw new NotAcceptableException('Invalid request');
