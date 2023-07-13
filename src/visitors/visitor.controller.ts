@@ -32,10 +32,8 @@ export class VisitorController {
     @Body() body: AddNewVisitorDto,
     @Req() request: Request,
   ): Promise<IAddVisitor> {
-    const clientIP = request.headers['x-forwarded-for'];
-    // ?.split(',').shift() ||
-    // request.socket?.remoteAddress;
-
+    const clientIP =
+      request.headers['x-forwarded-for'] || request.socket.remoteAddress;
     console.log('Testee did', {
       ...body,
       IP_Remote_Access: clientIP,
