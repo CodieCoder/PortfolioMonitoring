@@ -2,7 +2,7 @@
 ## Description
 
 Back-end built for monitoring my personal portfolio website and contact form.
-Built on [Nest](https://github.com/nestjs/nest) framework using TYoescript
+Built on [Nest](https://github.com/nestjs/nest) framework using Typescript
 
 ## Installation
 
