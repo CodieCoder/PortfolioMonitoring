@@ -32,7 +32,7 @@ export class VisitorController {
     @Body() body: AddNewVisitorDto,
     @Req() request: Request,
   ): Promise<IAddVisitor> {
-    console.log('Testee did', body);
+    console.log('Testee did', { ...body, IP: request.ip });
     if (!body.deviceInfo) {
       throw new NotAcceptableException('Invalid request');
     }
