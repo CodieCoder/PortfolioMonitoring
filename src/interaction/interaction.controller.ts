@@ -18,7 +18,9 @@ export class InteractionController {
     @Body() body: string,
     @NestRequest() req,
   ): Promise<boolean> {
-    const ipAddress = req.ip;
+    const ipAddress =
+      JSON.stringify(req.headers['x-forwarded-for']) ||
+      req.socket.remoteAddress;
     return await this.interactionService.addInteraction({
       ipAddress,
       token: JSON.stringify(req.visitor),
