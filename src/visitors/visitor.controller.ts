@@ -35,6 +35,9 @@ export class VisitorController {
     if (!body.deviceInfo) {
       throw new NotAcceptableException('Invalid request');
     }
+    console.log(request.headers['x-forwarded-for']);
+    console.log(request.socket.remoteAddress);
+
     const ipAddress =
       JSON.stringify(request.headers['x-forwarded-for']) ||
       request.socket.remoteAddress;
