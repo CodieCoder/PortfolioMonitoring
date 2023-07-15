@@ -10,6 +10,7 @@ import { MessagesService } from './messages.service';
 import { SendMessageDto } from './dto/send-message.dto';
 import { Messages } from './schema/messages.schema';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { getIpAddress } from 'src/utils/ipAddress';
 
 @Controller('message')
 export class MessagesController {
@@ -21,9 +22,7 @@ export class MessagesController {
     @Body() body: SendMessageDto,
     @NestRequest() request,
   ): Promise<Messages> {
-    const ipAddress =
-      JSON.stringify(request.headers['x-forwarded-for']) ||
-      request.socket.remoteAddress;
+    const ipAddress = getIpAddress(request);
     const token = JSON.stringify(request.visitor);
     return this.messagesService.addMessage({ ...body, ipAddress, token });
   }

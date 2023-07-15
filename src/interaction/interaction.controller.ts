@@ -7,6 +7,7 @@ import {
 } from '@nestjs/common';
 import { InteractionService } from './interaction.service';
 import { AuthGuard } from 'src/guards/auth.guard';
+import { getIpAddress } from 'src/utils/ipAddress';
 
 @Controller('interaction')
 export class InteractionController {
@@ -18,9 +19,7 @@ export class InteractionController {
     @Body() body: string,
     @NestRequest() req,
   ): Promise<boolean> {
-    const ipAddress =
-      JSON.stringify(req.headers['x-forwarded-for']) ||
-      req.socket.remoteAddress;
+    const ipAddress = getIpAddress(req);
     return await this.interactionService.addInteraction({
       ipAddress,
       token: JSON.stringify(req.visitor),

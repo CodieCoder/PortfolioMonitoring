@@ -12,6 +12,7 @@ import { Request } from 'express';
 import { JwtAuthService } from 'src/jwt/jwt.service';
 import { IAddVisitor } from 'src/common/types';
 import { Visitor } from './schema/visitor.schema';
+import { getIpAddress } from 'src/utils/ipAddress';
 
 @Controller('visitors')
 export class VisitorController {
@@ -35,12 +36,8 @@ export class VisitorController {
     if (!body.deviceInfo) {
       throw new NotAcceptableException('Invalid request');
     }
-    console.log(request.headers['x-forwarded-for']);
-    console.log(request.socket.remoteAddress);
 
-    const ipAddress =
-      JSON.stringify(request.headers['x-forwarded-for']) ||
-      request.socket.remoteAddress;
+    const ipAddress = getIpAddress(request);
     const token = await this.authService.generateToken({
       ipAddress,
       deviceInfo: JSON.stringify(body.deviceInfo),
