@@ -33,4 +33,9 @@ export class InteractionController {
   async getInteractions(): Promise<Interactions[]> {
     return await this.interactionService.findAll();
   }
+
+  @Get('group')
+  async groupInteractions(): Promise<Interactions[]> {
+    return await this.interactionService.findAndGroup();
+  }
 }

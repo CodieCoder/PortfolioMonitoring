@@ -21,4 +21,12 @@ export class InteractionService {
     const interactions = await this.interactionsModel.find();
     return interactions || [];
   }
+
+  async findAndGroup() {
+    const interactions = await this.interactionsModel.aggregate([
+      { $group: { _id: '$ipAddress', interactions: { $push: '$$ROOT' } } },
+    ]);
+
+    return interactions;
+  }
 }
