@@ -4,10 +4,12 @@ import {
   Post,
   Request as NestRequest,
   UseGuards,
+  Get,
 } from '@nestjs/common';
 import { InteractionService } from './interaction.service';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { getIpAddress } from 'src/utils/ipAddress';
+import { Interactions } from './schema/interactions.schema';
 
 @Controller('interaction')
 export class InteractionController {
@@ -25,5 +27,10 @@ export class InteractionController {
       token: JSON.stringify(req.visitor),
       action: JSON.stringify(body),
     });
+  }
+
+  @Get()
+  async getInteractions(): Promise<Interactions[]> {
+    return await this.interactionService.findAll();
   }
 }

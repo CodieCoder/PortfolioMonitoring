@@ -16,4 +16,9 @@ export class InteractionService {
 
     return interaction ? true : false;
   }
+
+  async findAll() {
+    const interactions = await this.interactionsModel.find();
+    return interactions || [];
+  }
 }
