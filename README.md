@@ -43,7 +43,7 @@ nonso4emma@yahoo.com
 ## Stay in touch
 
 - Author - [Chukwunonso Nnalue](nonso4emma@yahoo.com)
-- Website - [https://nestjs.com](https://nnaluenonso.vercel.app/)
+- Website - [https://nonsonnalue.vercel.app](https://nonsonnalue.vercel.app)
 - Twitter - [@nestframework](https://twitter.com/superkindabreed)
 
 ## License
